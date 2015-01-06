@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.google.gson.reflect.TypeToken"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="org.apache.http.client.HttpClient"/>
+<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpGet"/>
+<fullyQualifiedTypeName name="com.example.acupunturaclienteandroid.webutils.RestClientException"/>
+<fullyQualifiedTypeName name="com.example.acupunturaclienteandroid.webutils.WebServiceUtils"/>
+<fullyQualifiedTypeName name="org.apache.http.util.EntityUtils"/>
+</qualifiedTypeNameHistroy>
