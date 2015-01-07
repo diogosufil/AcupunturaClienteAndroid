@@ -1,0 +1,32 @@
+1420563090600	Rename field 'button_Login'
+1420563250656	Change Layout
+1420563260725	Change Layout
+1420563370959	Rename field 'buttonShowToken'
+1420563392723	Extracts string 'null' into R.string.logout
+1420563741398	Extracts string 'null' into R.string.data_management
+1420563817705	Extracts string 'null' into R.string.human_resources
+1420634580713	Extracts string 'null' into R.string.generateDiagnostics
+1420634829125	Extracts string 'null' into R.string.symptoms
+1420634887571	Extracts string 'null' into R.string.chooseSymptoms
+1420634914567	Change Layout
+1420635142586	Delete element
+1420635167161	Delete element
+1420635272362	Delete element
+1420635274246	Delete element
+1420635347972	Extracts string 'null' into R.string.newAppointment
+1420635571902	Extracts string 'null' into R.string.patientBi
+1420635638637	Change Layout
+1420635859017	Extracts string 'null' into R.string.name
+1420636769780	Rename field 'textView1'
+1420642974066	Extracts string 'null' into R.string.bi_Cu
+1420643068983	Extracts string 'null' into R.string.birthdate
+1420643525497	Extracts string 'null' into R.string.clinicalRecord
+1420644738176	Change Layout
+1420644813727	Rename field 'button1'
+1420644936406	Rename field 'buttonGeraDiagn'
+1420644963000	Rename field 'buttonClinicalRecord'
+1420644983550	Rename field 'buttonGerarDiagn'
+1420662699891	Rename field 'textView1'
+1420668574904	Change Layout
+1420668634917	Rename field 'listViewSintomas'
+1420668676685	Extracts string 'null' into R.string.diag_result

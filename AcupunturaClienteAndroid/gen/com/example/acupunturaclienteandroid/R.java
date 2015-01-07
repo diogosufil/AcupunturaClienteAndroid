@@ -10,6 +10,20 @@ package com.example.acupunturaclienteandroid;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int article_title=0x7f04000a;
+        public static final int articlecolor=0x7f040009;
+        public static final int black=0x7f040004;
+        public static final int blue=0x7f040006;
+        public static final int blueback=0x7f040008;
+        public static final int cachecolor=0x7f04000b;
+        public static final int date_color=0x7f040003;
+        public static final int gold=0x7f040007;
+        public static final int gray=0x7f040005;
+        public static final int orange=0x7f040000;
+        public static final int transparent=0x7f040002;
+        public static final int white=0x7f040001;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -18,45 +32,88 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int ac_img=0x7f020000;
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int TextView01=0x7f080001;
-        public static final int TextView02=0x7f080004;
-        public static final int action_settings=0x7f08000a;
-        public static final int button_Login=0x7f080007;
-        public static final int editText_Login_Password=0x7f080006;
-        public static final int editText_Login_Username=0x7f080005;
-        public static final int imageView1=0x7f080002;
-        public static final int listView1=0x7f080009;
-        public static final int textView1=0x7f080000;
-        public static final int textView2=0x7f080003;
-        public static final int textView_Main_token=0x7f080008;
+        public static final int LinearLayout1=0x7f090000;
+        public static final int LinearLayout2=0x7f090014;
+        public static final int TextView01=0x7f09000e;
+        public static final int TextView02=0x7f090010;
+        public static final int action_settings=0x7f090018;
+        public static final int buttonChooseSymptoms=0x7f09000a;
+        public static final int buttonClinicalRecord=0x7f09000b;
+        public static final int buttonDataManagement=0x7f090015;
+        public static final int buttonGeraDiagn=0x7f090017;
+        public static final int buttonHumanResources=0x7f090016;
+        public static final int buttonLogout=0x7f090013;
+        public static final int editText1=0x7f090002;
+        public static final int editText2=0x7f090005;
+        public static final int editText3=0x7f090008;
+        public static final int editText_Login_Password=0x7f090012;
+        public static final int editText_Login_Username=0x7f090011;
+        public static final int imageView1=0x7f09000f;
+        public static final int listViewDiag=0x7f09000d;
+        public static final int textView2=0x7f090003;
+        public static final int textView3=0x7f090006;
+        public static final int textView4=0x7f090007;
+        public static final int textView5=0x7f090009;
+        public static final int textViewDiag=0x7f090004;
+        public static final int textViewGetExtra=0x7f090001;
+        public static final int tvDiag=0x7f09000c;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
+        public static final int activity_appointment=0x7f030000;
+        public static final int activity_diagnostics=0x7f030001;
+        public static final int activity_human_resources=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_symptoms=0x7f030005;
     }
     public static final class menu {
-        public static final int login=0x7f070000;
-        public static final int main=0x7f070001;
-        public static final int menu=0x7f070002;
+        public static final int appointment=0x7f080000;
+        public static final int consultation=0x7f080001;
+        public static final int data_management=0x7f080002;
+        public static final int diagnostics=0x7f080003;
+        public static final int human_resources=0x7f080004;
+        public static final int login=0x7f080005;
+        public static final int main=0x7f080006;
+        public static final int menu=0x7f080007;
+        public static final int symptoms=0x7f080008;
     }
     public static final class string {
-        public static final int action_settings=0x7f050002;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int login=0x7f050005;
-        public static final int nothing=0x7f050008;
-        public static final int password=0x7f050007;
-        public static final int title_activity_main=0x7f050004;
-        public static final int title_activity_menu=0x7f050003;
-        public static final int username=0x7f050006;
+        public static final int action_settings=0x7f060002;
+        public static final int app_name=0x7f060000;
+        public static final int bi_Cu=0x7f060016;
+        public static final int birthdate=0x7f060017;
+        public static final int chooseSymptoms=0x7f060010;
+        public static final int clinicalRecord=0x7f060018;
+        public static final int data_management=0x7f06000a;
+        public static final int diag_result=0x7f06001b;
+        public static final int generateDiagnostics=0x7f06000e;
+        public static final int hello_world=0x7f060001;
+        public static final int human_resources=0x7f06000b;
+        public static final int login=0x7f060005;
+        public static final int logout=0x7f060009;
+        public static final int name=0x7f060015;
+        public static final int newAppointment=0x7f060013;
+        public static final int nothing=0x7f060008;
+        public static final int password=0x7f060007;
+        public static final int patientBi=0x7f060014;
+        public static final int symptoms=0x7f06000f;
+        public static final int title_activity_appointment=0x7f060012;
+        public static final int title_activity_consultation=0x7f060011;
+        public static final int title_activity_data_management=0x7f06000c;
+        public static final int title_activity_diagnostics=0x7f06001a;
+        public static final int title_activity_human_resources=0x7f06000d;
+        public static final int title_activity_main=0x7f060004;
+        public static final int title_activity_menu=0x7f060003;
+        public static final int title_activity_symptoms=0x7f060019;
+        public static final int username=0x7f060006;
     }
     public static final class style {
         /** 
@@ -80,10 +137,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

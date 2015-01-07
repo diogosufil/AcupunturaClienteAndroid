@@ -2,12 +2,14 @@ package com.example.acupunturaclienteandroid;
 
 import java.io.IOException;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -35,22 +37,27 @@ public class Login extends Activity {
 
 		username = (EditText) findViewById(R.id.editText_Login_Username);
 		password = (EditText) findViewById(R.id.editText_Login_Password);
-		Button btnLogin = (Button) findViewById(R.id.button_Login);
+		Button btnLogin = (Button) findViewById(R.id.buttonLogout);
 
 		btnLogin.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (username.getText().toString().equals("")
-						|| password.getText().toString().equals("")) {
-					Toast.makeText(getApplicationContext(),
-							"Please insert Username and Password",
-							Toast.LENGTH_SHORT).show();
+				if (isNetworkAvailable()) {
+					if (username.getText().toString().equals("")
+							|| password.getText().toString().equals("")) {
+						Toast.makeText(getApplicationContext(),
+								"Please insert Username and Password",
+								Toast.LENGTH_SHORT).show();
 
+					} else {
+						new LogInWeb().execute(username.getText().toString()
+								.trim(), password.getText().toString().trim());
+					}
 				} else {
-					new LogInWeb().execute(
-							username.getText().toString().trim(), password
-									.getText().toString().trim());
+					Toast.makeText(getApplicationContext(),
+							"No Internet connection!\nPlease connect to Internet...",
+							Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -78,7 +85,7 @@ public class Login extends Activity {
 		protected void onPreExecute() {
 			ringProgressDialog = new ProgressDialog(Login.this);
 			ringProgressDialog.setIcon(R.drawable.ic_launcher);
-			ringProgressDialog.setTitle("Please wait...");
+			ringProgressDialog.setTitle("Please wait");
 			ringProgressDialog.setMessage("Loging in...");
 
 			ringProgressDialog.setCancelable(false);
@@ -109,28 +116,14 @@ public class Login extends Activity {
 				if (!token.isEmpty()) {
 					ringProgressDialog.dismiss();
 					token = token.replace("\"", "");
-					try {
-						if(WebServiceUtils.isAdmin(token)){
-						PreferenceManager
-								.getDefaultSharedPreferences(
-										getApplicationContext()).edit()
-								.putString("token", token).commit();
-						startActivity(new Intent(getApplicationContext(),
-								MainActivity.class));
-						}else{
-							Toast.makeText(getApplicationContext(),
-									"Sorry but you don't have permition to access this area.",
-									Toast.LENGTH_SHORT).show();					
-						}
-					} catch (ClientProtocolException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					} catch (RestClientException e) {
-						e.printStackTrace();
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
+
+					PreferenceManager
+							.getDefaultSharedPreferences(
+									getApplicationContext()).edit()
+							.putString("token", token).commit();
+					startActivity(new Intent(getApplicationContext(),
+							MainActivity.class));
+
 				}
 			} else {
 				ringProgressDialog.dismiss();
@@ -139,5 +132,12 @@ public class Login extends Activity {
 
 			}
 		}
+	}
+
+	private boolean isNetworkAvailable() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager
+				.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 }

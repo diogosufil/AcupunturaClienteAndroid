@@ -6,4 +6,10 @@
 		<item value="316" key="y"/>
 		<item value="400" key="height"/>
 	</section>
+	<section name="com.android.ide.eclipse.adt.internal.editors.layout.properties.StringXmlPropertyDialog">
+		<item value="730" key="x"/>
+		<item value="460" key="width"/>
+		<item value="428" key="y"/>
+		<item value="175" key="height"/>
+	</section>
 </section>

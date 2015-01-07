@@ -1,0 +1,55 @@
+package com.example.acupunturaclienteandroid;
+
+import java.util.ArrayList;
+
+import com.example.acupunturaclienteandroid.model.SintomaWEB;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+public class Diagnostics extends Activity {
+
+	private TextView txtViewDiag;
+	private ArrayList<SintomaWEB> listaSintomasSelecionados = new ArrayList<SintomaWEB>();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_diagnostics);
+		
+		txtViewDiag = (TextView) findViewById(R.id.textViewDiag);
+		
+		String sintomas = getIntent().getStringExtra(Symptoms.DIAGNOSTICOS);
+		txtViewDiag.setText(sintomas);
+		
+		for(String s : sintomas.split("\n")){
+			SintomaWEB sin = new SintomaWEB();
+			sin.setNome(s);
+			listaSintomasSelecionados.add(sin);
+		}
+		
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.diagnostics, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}

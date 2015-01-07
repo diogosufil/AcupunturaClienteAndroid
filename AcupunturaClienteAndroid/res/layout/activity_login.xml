@@ -17,7 +17,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textViewGetExtra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nothing"
@@ -56,7 +56,8 @@
             android:id="@+id/editText_Login_Username"
             android:layout_width="219dp"
             android:layout_height="wrap_content"
-            android:hint="@string/username" >
+            android:hint="@string/username"
+            android:text="admin" >
 
             <requestFocus />
         </EditText>
@@ -67,10 +68,11 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="admin" />
 
         <Button
-            android:id="@+id/button_Login"
+            android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login" />

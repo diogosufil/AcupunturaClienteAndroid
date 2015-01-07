@@ -1,5 +1,4 @@
 INDEX VERSION 1.126+E:\Diogo\Faculdade\I.S\_Projeto\Etapa 2\Source Control\AcupunturaClienteAndroid\.metadata\.plugins\org.eclipse.jdt.core
 1104716902.index
 279050374.index
-1855735096.index
 949214657.index

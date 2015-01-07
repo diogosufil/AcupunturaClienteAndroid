@@ -1,12 +1,15 @@
 package com.example.acupunturaclienteandroid;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,45 +17,59 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.acupunturaclienteandroid.model.UtilizadorWEB;
 import com.example.acupunturaclienteandroid.webutils.RestClientException;
 import com.example.acupunturaclienteandroid.webutils.WebServiceUtils;
 
 public class MainActivity extends Activity {
 
-	private String token;
-    private ProgressDialog ringProgressDialog;
-    private ListView listaUtilizadores;
-    private ArrayAdapter<UtilizadorWEB> adaptadorUtilizadores;
+	private String token = "";
+	private ProgressDialog ringProgressDialog;
+	public static final String BI = "bi";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		token = PreferenceManager.getDefaultSharedPreferences(this).getString("token", "null");
-		TextView texto = (TextView) findViewById(R.id.textView_Main_token);
-		listaUtilizadores = (ListView) findViewById(R.id.listView1);
-		
-		texto.setText(token);
-		
-		
-		Button btnLogin = (Button) findViewById(R.id.button_Login);
-        
-        btnLogin.setOnClickListener(new OnClickListener() {
-			
+
+		Button btnLogout = (Button) findViewById(R.id.buttonLogout);
+		Button btnNewAppointment = (Button) findViewById(R.id.buttonDataManagement);
+		Button btnHumanResources = (Button) findViewById(R.id.buttonHumanResources);
+
+		btnLogout.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				
-				new getUtilizadores().execute(token);
+				// Logout:
+				new logout().execute();
 			}
 		});
+
+		btnNewAppointment.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// New Appointment:
+				getPacienteBi(MainActivity.this).show();
+			}
+		});
+
+		btnHumanResources.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Human Resources:
+				Intent i = new Intent(getApplicationContext(),
+						HumanResources.class);
+				startActivity(i);
+			}
+		});
+
 	}
 
 	@Override
@@ -73,58 +90,84 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	private class getUtilizadores extends AsyncTask<String, Void, ArrayList<UtilizadorWEB>> {
+
+	// Logout --------------------------------------------------
+
+	private class logout extends AsyncTask<String, Void, String> {
 		@Override
-        protected void onPreExecute() {
+		protected void onPreExecute() {
 
-            ringProgressDialog = new ProgressDialog(MainActivity.this);
-            ringProgressDialog.setTitle("Aguarde...");
-            ringProgressDialog.setMessage("A carregar Dados...");
+			ringProgressDialog = new ProgressDialog(MainActivity.this);
+			ringProgressDialog.setTitle("Please Wait");
+			ringProgressDialog.setMessage("Loging Out...");
+			ringProgressDialog.setCancelable(false);
+			ringProgressDialog.show();
+		};
 
-            // ringProgressDialog = ProgressDialog.show(Login.this,
-            // "Please wait ...", "Loging in...", true);
-            ringProgressDialog.setCancelable(false);
+		@Override
+		protected String doInBackground(String... params) {
 
-            ringProgressDialog.show();
-        }
-
-        ;
-
-        @Override
-        protected ArrayList<UtilizadorWEB> doInBackground(String... params) {
-            ArrayList<UtilizadorWEB> lista = null;
-
-            try {
-                lista = WebServiceUtils.getAllUtilizadores(token);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (RestClientException e) {
+			String result = "";
+			try {
+				result = WebServiceUtils.logOut(token);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (RestClientException e) {
 				e.printStackTrace();
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+			return result;
+		}
 
-            return lista;
-        }
-        @Override
-		protected void onPostExecute(ArrayList<UtilizadorWEB> lista) {
-            if (lista != null) {
-                adaptadorUtilizadores = new ArrayAdapter<UtilizadorWEB>(getBaseContext(),
-                        android.R.layout.simple_list_item_1, lista);
+		@Override
+		protected void onPostExecute(String result) {
 
-                listaUtilizadores.setAdapter(adaptadorUtilizadores);
+			Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG)
+					.show();
+			startActivity(new Intent(getApplicationContext(), Login.class));
+			ringProgressDialog.dismiss();
 
-                // "Connexão Efetuada com Sucesso!");
-                Toast.makeText(getApplicationContext(),
-                        "Get Utilizadores successful!" + lista.toString(), Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(),
-                        "Get Utilizadores unsuccessful...", Toast.LENGTH_LONG)
-                        .show();
+		}
+	}
 
-            }
-            ringProgressDialog.dismiss();
-        }
-    }
+	// Fim Logout -------------------------------------------
+
+	// New Appointement getPatientPorBI:
+
+	private AlertDialog getPacienteBi(Context c) {
+		AlertDialog.Builder alert = new AlertDialog.Builder(c);
+
+		alert.setTitle("Get Patient");
+		alert.setMessage("BI or CU:");
+
+		final EditText input = new EditText(c);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String bi = "";
+				try{
+					bi = input.getText().toString();
+					//value = value.toUpperCase().replaceAll(" ", "");
+					//getPatinteByBi()
+					Intent i = new Intent(getApplicationContext(),
+							Appointment.class);
+					i.putExtra(BI, bi);
+					startActivity(i);
+				}catch (Exception e){
+					Toast.makeText(getApplicationContext(), "Error:\n" + e.getMessage(), Toast.LENGTH_LONG)
+					.show();
+				}
+			}
+		});
+
+		alert.setNegativeButton("Cancelar",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					}
+				});
+		return alert.create();
+	}
+	// ---------------------------------------------
 }
